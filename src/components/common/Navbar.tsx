@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AlignLeft, Mail, X } from "lucide-react";
+import { AlignLeft, X, LogOut, UserRound } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,19 +11,22 @@ import {
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
-
-
-
+import { Button } from "@/components/ui/button";
+import { useAuthModal } from "@/hooks/useAuthModal";
+import AuthModal from "@/pages/Auth";
 
 
 
 const Navbar = () => {
 
 
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // fake state for now
   const location = useLocation();
+
+
+  const authModal = useAuthModal();
 
 
 
@@ -41,16 +44,14 @@ const Navbar = () => {
     };
 
     if (location.pathname === "/") {
-      // Check immediately when coming back to home
       handleScroll();
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
     } else {
-      // Any other page → navbar should be always white
       setIsScrolled(true);
     }
-  }, [location.pathname]);
 
+  }, [location.pathname]);
 
 
 
@@ -113,11 +114,26 @@ const Navbar = () => {
 
 
 
-
   // Dynamic classes
   const isHome = location.pathname === "/";
   const bgClass = isHome && !isScrolled ? "bg-transparent" : "bg-white shadow";
   const textClass = isHome && !isScrolled ? "text-white" : "text-gray-800";
+
+
+
+  // Fake login/logout handler
+  const handleAuthClick = () => {
+    if (isLoggedIn) {
+      // logout
+      setIsLoggedIn(false);
+      console.log("Logged out");
+    } else {
+      // open login modal
+      authModal.onOpen();
+    }
+  };
+
+
 
 
 
@@ -127,15 +143,13 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${bgClass}`}
     >
 
-
       <div className="max-w mx-auto px-4 sm:px-6 lg:px-14">
-
 
         <div className="flex items-center justify-between h-16">
 
-
           {/* Logo */}
           <div className="flex-shrink-0">
+
             <Link to="/" className="flex items-center space-x-2 px-4 p-1">
               {isScrolled ? (
                 <img
@@ -144,8 +158,8 @@ const Navbar = () => {
                   loading="lazy"
                   className="h-12 sm:h-16 w-full object-contain"
                 />
-              ): (
-                <img 
+              ) : (
+                <img
                   src="/Logo-White.png"
                   alt="nav-logo"
                   loading="lazy"
@@ -153,21 +167,21 @@ const Navbar = () => {
                 />
               )}
             </Link>
+
           </div>
 
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
 
-
             <NavigationMenu>
-
 
               <NavigationMenuList className="space-x-3">
 
-
                 {navItems.slice(0, 2).map((item) => (
+
                   <NavigationMenuItem key={item.name}>
+
                     <Link
                       to={item.href}
                       className={cn(
@@ -180,11 +194,13 @@ const Navbar = () => {
                       {item.name}
                     </Link>
                   </NavigationMenuItem>
+
                 ))}
 
 
                 {/* Services Dropdown */}
                 <NavigationMenuItem>
+
                   <NavigationMenuTrigger
                     className={`${textClass} bg-transparent hover:cursor-pointer hover:opacity-80 text-sm font-medium transition-colors`}
                   >
@@ -192,22 +208,32 @@ const Navbar = () => {
                   </NavigationMenuTrigger>
 
                   <NavigationMenuContent className="[&[data-state=open]]:shadow-lg">
+
                     <div className="grid gap-3 p-6 w-[600px]">
+
                       <div className="row-span-3">
+
                         <NavigationMenuLink asChild>
-                          <div className="flex h-full w-full select-none flex-col justify-end rounded-md 
+
+                          <div
+                            className="flex h-full w-full select-none flex-col justify-end rounded-md 
                             bg-gradient-to-b from-[#001224] via-[#4B0B12] to-[#D6040B] 
                             p-6 no-underline outline-none focus:shadow-md transition duration-300 hover:scale-[1.02]"
                           >
+
                             <div className="mb-2 mt-4 text-lg font-semibold text-white drop-shadow">
                               Our Products & Service
                             </div>
+
                             <p className="text-sm leading-tight text-gray-100 drop-shadow-sm">
                               Comprehensive solutions for all your business needs
                             </p>
                           </div>
+
                         </NavigationMenuLink>
+
                       </div>
+
 
                       <div className="grid grid-cols-2 gap-2">
                         {services.map((service) => (
@@ -234,9 +260,14 @@ const Navbar = () => {
                           </NavigationMenuLink>
                         ))}
                       </div>
+
                     </div>
+
                   </NavigationMenuContent>
+
                 </NavigationMenuItem>
+
+
 
                 {navItems.slice(2).map((item) => (
                   <NavigationMenuItem key={item.name}>
@@ -255,21 +286,33 @@ const Navbar = () => {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
+
+
           </div>
 
-          {/* Contact Button */}
-          <Link
-            to="/contact"
-            className={`hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full font-medium text-sm
-              transition-all duration-300 ease-in-out
-              ${isHome && !isScrolled
-                ? "bg-white text-black hover:opacity-90"
-                : "bg-zinc-900 text-white hover:shadow-lg hover:scale-[1.03] active:scale-[0.97]"
-              }`}
-          >
-            <Mail size={14} />
-            Enquire Now
-          </Link>
+
+
+          {/* Right side buttons */}
+          <div className="flex items-center gap-4">
+
+            {/* Auth Button */}
+            <Button
+              onClick={handleAuthClick}
+              className={`hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full ${isHome && !isScrolled ? "bg-white text-black hover:bg-gray-100 hover:cursor-pointer hover:scale-105" : "bg-red-500 text-white hover:bg-red-600 hover:shadow-lg hover:scale-[1.03] active:scale-[0.97] hover:cursor-pointer"} `}
+            >
+              {isLoggedIn ? (
+                <>
+                  <LogOut size={16} /> Logout
+                </>
+              ) : (
+                <>
+                  <UserRound size={16} /> Login
+                </>
+              )}
+            </Button>
+
+          </div>
+
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -294,6 +337,9 @@ const Navbar = () => {
           services={services}
         />
       </div>
+
+      {/* Place modal once here */}
+      <AuthModal open={authModal.open} onOpenChange={authModal.setOpen} />
     </nav>
   );
 };
