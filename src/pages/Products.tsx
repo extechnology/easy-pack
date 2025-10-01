@@ -1,12 +1,24 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, ChevronDown, ChevronUp, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import ProductCard from "@/components/common/ProductCard";
 
+
+
+interface Product {
+    id: number;
+    title: string;
+    description: string;
+    points: string[];
+    image: string;
+    price: number;
+    oldPrice?: number;
+    inStock: boolean;
+}
 
 
 // ✅ Full product list
-const products = [
+export const productsData : Product[]  = [
     {
+        id: 1,
         title: "Regular Slotted Carton (RSC)",
         description:
             "Regular Slotted Cartons (RSC) are widely used packaging boxes known for their durability, versatility, and cost-effectiveness. Featuring equally sized flaps that meet at the center, they provide excellent protection for goods during shipping and storage. Ideal for multiple industries, RSC boxes are strong, efficient, and customizable for branding needs.",
@@ -22,10 +34,13 @@ const products = [
             "Standardized Size Availability – Widely available in standard sizes, reducing lead times.",
             "Eco-Friendly – Typically made from recyclable corrugated fiberboard, supporting sustainability.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 250,
+        oldPrice: 300,
+        inStock: true,
     },
     {
+        id: 2,
         title: "Folding Cartons",
         description:
             "Folding cartons are lightweight, versatile packaging solutions made from paperboard, commonly used for retail products. They are easily customizable, eco-friendly, and cost-effective, offering attractive branding opportunities while ensuring product protection and convenient handling for various industries.",
@@ -41,10 +56,12 @@ const products = [
             "Protective – Provides adequate protection for lightweight to medium-weight items.",
             "Versatile Applications – Commonly used in food, cosmetics, pharmaceuticals, and retail products.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 150,
+        inStock: true, 
     },
     {
+        id: 3,
         title: "Litholaminated Boxes",
         description:
             "Litho laminated cartons combine high-quality lithographic printing with strong corrugated board, creating durable and visually appealing packaging. Ideal for retail displays, electronics, and consumer goods, they offer excellent print clarity, vibrant graphics, and robust protection. Perfect for businesses seeking premium branding, product visibility, and reliable packaging performance.",
@@ -60,10 +77,12 @@ const products = [
             "Flat Packed – Delivered in flat form for cost-efficient storage and shipping.",
             "Luxury Appeal – Ideal for high-end retail and promotional packaging.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 400,
+        inStock: true,
     },
     {
+        id: 4,
         title: "Die-Cut Boxes",
         description:
             "Customized and non-customized die-cut boxes are precision-cut packaging solutions tailored to specific shapes and sizes. They provide superior fit, protection, and presentation, with customization enhancing branding, while non-customized options offer versatile, cost-effective packaging for diverse business needs.",
@@ -79,10 +98,12 @@ const products = [
             "Versatile Applications – Ideal for e-commerce, food, electronics, cosmetics, and retail.",
             "Cost-Effective – Reduces material waste while delivering high visual and functional value.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 300,
+        inStock: false,
     },
     {
+        id: 5,
         title: "Rigid Boxes",
         description:
             "Customized and non-customized rigid boxes are durable, premium packaging solutions designed for strength and elegance. Customized versions enhance brand identity with tailored designs, while non-customized options provide reliable, ready-to-use packaging. Both ensure superior protection, luxury appeal, and lasting impressions, making them ideal for gifts, electronics, and high-value products.",
@@ -98,10 +119,12 @@ const products = [
             "Versatile Applications – Widely used for electronics, fashion, jewelry, cosmetics, and luxury goods.",
             "Enhanced Brand Value – Creates a lasting impression that strengthens brand identity.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 600,
+        inStock: true,
     },
     {
+        id: 6,
         title: "Corrugated Mailer Boxes",
         description:
             "Customized and non-customized corrugated mailer boxes offer strong, lightweight, and eco-friendly packaging ideal for shipping. Customized options enhance branding with logos and designs, while non-customized provide ready-to-use practicality. Both ensure secure product protection, easy handling, and a professional appearance, making them perfect for e-commerce, retail, and subscription-based businesses.",
@@ -117,10 +140,12 @@ const products = [
             "Easy Assembly – Quick to fold and pack products.",
             "Professional Look – Clean, stylish appearance enhances customer unboxing experience.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 200,
+        inStock: true,
     },
     {
+        id: 7,
         title: "Display Boxes",
         description:
             "Customized and non-customized display boxes are designed to showcase products attractively in retail spaces. Customized options allow branding, graphics, and tailored sizing for maximum visibility, while non-customized versions offer ready-to-use practicality. Both enhance product presentation, boost sales, and create an organized, professional display that captures customer attention effectively.",
@@ -134,10 +159,12 @@ const products = [
             "Versatile Use – Ideal for cosmetics, food, electronics, and promotional items.",
             "Eco-Friendly – Recyclable and sustainable packaging option.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 180,
+        inStock: false,
     },
     {
+        id: 8,
         title: "Partitioned Boxes",
         description:
             "Customized and non-customized partitioned boxes provide secure packaging with internal dividers, ideal for fragile or multiple items. Customized options allow tailored partitions for specific product dimensions, ensuring added protection. Non-customized versions offer ready-to-use solutions, minimizing movement and damage during transit while keeping products organized, safe, and neatly arranged.",
@@ -151,10 +178,12 @@ const products = [
             "Flat Packed – Supplied in flat form for cost-efficient shipping and storage.",
             "Improved Handling – Makes packing, storing, and unpacking products easier and safer.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 220, 
+        inStock: true,
     },
     {
+        id: 9,
         title: "Eco-Friendly Kraft Boxes",
         description:
             "Customized and non-customized eco-friendly Kraft boxes are made from recyclable, biodegradable materials, offering sustainable packaging solutions. Customized designs enhance branding with unique prints and sizes, while non-customized options provide versatile, ready-to-use packaging. Both ensure durability, eco-conscious appeal, and safe product storage, supporting businesses committed to environmental responsibility and green practices.",
@@ -170,10 +199,12 @@ const products = [
             "Easy Assembly – Quick to fold and set up.",
             "Customer Appeal – Enhances brand value by promoting sustainability.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 120,
+        inStock: false,
     },
     {
+        id: 10,
         title: "Gable Boxes & Telescope Boxes",
         description:
             "Customized and non-customized gable boxes and telescope boxes provide versatile, durable, and stylish packaging solutions. Gable boxes feature a convenient handle and are ideal for food, gifts, or retail items, while telescope boxes offer superior protection with two-piece design. Customization supports branding, while non-customized options ensure quick, cost-effective packaging for businesses.",
@@ -187,8 +218,9 @@ const products = [
             "Versatile Applications – Ideal for gifts, bakery, apparel, electronics, and luxury items.",
             "Enhanced Customer Appeal – Combines practicality with stylish packaging for an impressive unboxing.",
         ],
-        image:
-            "https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        image:"https://media.istockphoto.com/id/1411289606/photo/paper-eco-friendly-disposable-tableware-with-recycling-signs-on-the-background-of-green-plants.jpg?s=612x612&w=0&k=20&c=ng731oZuBvrja5tNFkrcW-hWtWJqieyxw3A2HSei0QI=",
+        price: 350,
+        inStock: true,
     },
 ];
 
@@ -239,8 +271,8 @@ export default function Products() {
                 {/* Decorative blobs */}
                 <div className="absolute -top-20 -left-20 w-80 h-80 bg-green-300 rounded-full blur-3xl opacity-20 z-0"></div>
                 <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-green-700 rounded-full blur-3xl opacity-20 z-0"></div>
-            </section>
 
+            </section>
 
 
             {/* Product Grid */}
@@ -250,118 +282,19 @@ export default function Products() {
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
                 >
                     <AnimatePresence>
-                        {products.map((product, idx) => (
+                        {productsData.map((product, idx) => (
                             <ProductCard key={idx} product={product} />
                         ))}
                     </AnimatePresence>
                 </motion.div>
             </div>
 
-
         </div>
-
 
     )
 
-
 }
 
 
 
-function ProductCard({ product }: { product: any }) {
-    const [expanded, setExpanded] = useState(false);
 
-    return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="group relative bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
-        >
-            {/* Image */}
-            <div className="relative h-56 overflow-hidden">
-                <img
-                    src={product.image}
-                    alt={product.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition duration-500"></div>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    className="absolute bottom-4 left-4 text-white"
-                >
-                    <span className="text-xs uppercase tracking-wide bg-black/40 px-3 py-1 rounded-full">
-                        Featured
-                    </span>
-                </motion.div>
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
-                    {product.title}
-                </h3>
-
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                    {product.description}
-                </p>
-
-                {/* Bullet Points */}
-                <ul className="space-y-3 text-sm text-gray-700">
-                    <AnimatePresence>
-                        {product.points
-                            .slice(0, expanded ? product.points.length : 3)
-                            .map((point: string, i: number) => (
-                                <motion.li
-                                    key={i}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="flex items-start gap-2"
-                                >
-                                    <CheckCircle
-                                        size={16}
-                                        className="text-green-600 shrink-0 mt-0.5"
-                                    />
-                                    <span>{point}</span>
-                                </motion.li>
-                            ))}
-                    </AnimatePresence>
-                </ul>
-
-                {/* Expand / Collapse */}
-                {product.points.length > 3 && (
-                    <button
-                        onClick={() => setExpanded(!expanded)}
-                        className="mt-3 flex items-center text-green-700 text-sm font-medium hover:underline transition"
-                    >
-                        {expanded ? (
-                            <>
-                                Show Less <ChevronUp size={16} className="ml-1" />
-                            </>
-                        ) : (
-                            <>
-                                Show More <ChevronDown size={16} className="ml-1" />
-                            </>
-                        )}
-                    </button>
-                )}
-
-                {/* CTA */}
-                <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0px 8px 20px rgba(0,0,0,0.15)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="mt-6 self-start px-6 py-2 text-sm font-medium rounded-full bg-gradient-to-r from-green-600 to-green-500 text-white transition-all duration-300"
-                >
-                    Customize & Order Now{" "}
-                    <ShoppingCart className="inline-block ml-2 h-4 w-4" />
-                </motion.button>
-            </div>
-        </motion.div>
-    );
-}
