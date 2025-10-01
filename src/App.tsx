@@ -8,9 +8,12 @@ import ScrollToTop from "./components/common/ScrollToTop"
 // Lazy loading pages
 const Home = lazy(() => import("./pages/Index"))
 const Products = lazy(() => import("./pages/Products"))
+const ProductDetails = lazy(() => import("./pages/ProductDeatils"))
 const Contact = lazy(() => import("./pages/Contact"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
 const OurMarket = lazy(() => import("./pages/Market"))
+
+
 
 
 // Lazy loading Layouts
@@ -24,8 +27,6 @@ function App() {
 
 
   return (
-
-
 
     <>
 
@@ -42,6 +43,8 @@ function App() {
             <Route index element={<Home />} />
 
             <Route path="products" element={<Products />} />
+
+            <Route path="productdetails/:id" element={<ProductDetails />} />
 
             <Route path="contact" element={<Contact />} />
 
@@ -63,9 +66,7 @@ function App() {
 
     </>
 
-
   )
-
 
 }
 

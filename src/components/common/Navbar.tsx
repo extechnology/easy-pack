@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // fake state for now
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
 
 
@@ -116,7 +116,7 @@ const Navbar = () => {
 
   // Dynamic classes
   const isHome = location.pathname === "/";
-  const bgClass = isHome && !isScrolled ? "bg-transparent" : "bg-white shadow";
+  const bgClass = isHome && !isScrolled ? "bg-transparent" : "bg-white";
   const textClass = isHome && !isScrolled ? "text-white" : "text-gray-800";
 
 

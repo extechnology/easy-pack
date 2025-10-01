@@ -1,17 +1,29 @@
-import { Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
+
+
+
 export default function Footer() {
+
+
   return (
+
+
     <footer className="w-full border-t border-gray-800 bg-black">
+
+
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:justify-between md:items-start text-white">
+
+
         {/* Left Section */}
         <div className="md:w-1/3 mb-10 md:mb-0">
+
           <div className="flex items-center gap-2 mb-4">
-           <img src="/Logo-White.png" alt="logo" className="w-36 h-auto" />
+            <img src="/Logo-White.png" alt="logo" className="w-36 h-auto" />
           </div>
+
           <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-            Easypack Packing Solutions is your one-stop shop for all your packaging needs, from printing to packaging. 
+            Easypack Packing Solutions is your one-stop shop for all your packaging needs, from printing to packaging.
           </p>
 
           {/* Social Icons */}
@@ -70,7 +82,6 @@ export default function Footer() {
             <h3 className="text-sm font-semibold mb-3 text-white">Contact Info</h3>
             <ul className="space-y-4 text-gray-400 text-sm">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <p className="leading-relaxed">
                   EASYPACK PACKING SOLUTIONS,
                   <br />
@@ -81,7 +92,6 @@ export default function Footer() {
               </li>
 
               <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <div className="flex flex-col">
                   <a href="tel:+919656247222" className="hover:text-white">+91 9656 24 72 22</a>
                   <a href="tel:+919995664686" className="hover:text-white">+91 9995 66 46 86</a>
@@ -90,7 +100,6 @@ export default function Footer() {
               </li>
 
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <a href="mailto:info2easypack@gmail.com" className="hover:text-white break-all">
                   info2easypack@gmail.com
                 </a>
