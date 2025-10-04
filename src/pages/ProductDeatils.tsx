@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { CheckCircle2, Mail, ShoppingCart, Star, XCircle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
-import ProductCard from "@/components/common/ProductCard";
-import { productsData } from "./Products";
-
-
-
+import RelatedProducts from "@/components/common/RelatedProducts";
+import { useGetSingleProduct } from "@/services/products/queries";
+import { useParams } from "react-router-dom";
+import ErrorLoader from "@/components/loaders/ErrorLoader";
+import ProductDetailsSkeleton from "@/components/loaders/ProductDeatilLoader";
 
 
 
@@ -14,15 +14,57 @@ import { productsData } from "./Products";
 export default function ProductDeatils() {
 
 
+    const { id } = useParams();
+    const { data: productData, isLoading, isFetching, isError } = useGetSingleProduct(id as string);
+
+
+    // States
     const [selectedPaper, setSelectedPaper] = useState("Brown");
     const [selectedSize, setSelectedSize] = useState("");
+    const [selectedQuantity, setSelectedQuantity] = useState(1);
+    const [price, setPrice] = useState("");
+    const [image, setImage] = useState("");
 
 
-    const sizes = ["100 x 100 x 100 mm", "200 x 200 x 200 mm", "300 x 300 x 300 mm", "400 x 400 x 400 mm"];
+
+    // Set initial size, price, and image once productData is loaded
+    useEffect(() => {
+
+        if (productData?.sizes?.length) {
+
+            const firstSize = productData?.sizes[0];
+            setSelectedSize(firstSize?.size_ratio);
+
+            // Set price and image based on the default paper
+            setPrice(selectedPaper === "Brown" ? firstSize?.paper_brown_price : firstSize?.paper_white_price);
+            setImage(selectedPaper === "Brown" ? firstSize?.paper_brown_img : firstSize?.paper_white_img);
+
+        }
+
+    }, [productData]);
 
 
-    const [image, setImage] = useState<string>()
 
+    // Update price and image when size or paper changes
+    useEffect(() => {
+
+        if (!productData?.sizes?.length) return;
+
+        const sizeObj = productData?.sizes?.find(size => size?.size_ratio === selectedSize);
+        if (!sizeObj) return;
+
+        setPrice(selectedPaper === "Brown" ? sizeObj?.paper_brown_price : sizeObj?.paper_white_price);
+        setImage(selectedPaper === "Brown" ? sizeObj?.paper_brown_img : sizeObj?.paper_white_img);
+
+    }, [selectedSize, selectedPaper, productData]);
+
+
+
+    if (isError) return <ErrorLoader message="Something went wrong on our servers." onRetry={() => window.location.reload()} />;
+
+
+
+    if (isLoading || !productData || isFetching) return <ProductDetailsSkeleton />;
 
 
     return (
@@ -40,7 +82,7 @@ export default function ProductDeatils() {
                 <div className="text-sm text-gray-500 mb-4">
                     <span className="cursor-pointer hover:underline">Home</span> /{" "}
                     <span className="cursor-pointer hover:underline">Products</span> /{" "}
-                    <span className="text-gray-700">Regular Slotted Carton RSC</span>
+                    <span className="text-gray-700">{productData?.title}</span>
                 </div>
 
 
@@ -51,7 +93,7 @@ export default function ProductDeatils() {
                     <div>
 
                         <img
-                            src={image || "https://img.freepik.com/premium-psd/packaging-box-mockup_312099-281.jpg"}
+                            src={image}
                             alt="Peanuts Long Sleeve Sweatshirt"
                             loading="lazy"
                             className="rounded-xl w-full h-100 object-cover"
@@ -59,32 +101,22 @@ export default function ProductDeatils() {
 
                         {/* Thumbnails */}
                         <div className="flex gap-3 mt-4 overflow-x-auto pb-3">
-                            {[
-                                "https://img.freepik.com/premium-psd/packaging-box-mockup_312099-281.jpg",
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_AWroRkSCCuuWGXahZAGyfPEJPkk0X_gVObJdy8WxyKhiYJAgmCz-cyMYjFhuvv_sr0Q&usqp=CAU",
-                                "https://t4.ftcdn.net/jpg/03/17/17/99/360_F_317179935_GdXQQp2krxCYc2Y7CPwqQnk5hEuO1En8.jpg",
-                                "https://packmojo.com/cms_assets/packmojo_sample_kit_standard_mailer_box_f5b1d1138a.jpg",
-                            ].map((img, idx) => (
-                                <img
-                                    key={idx}
-                                    src={img}
-                                    alt="thumbnail"
-                                    loading="lazy"
-                                    onClick={() => setImage(img)}
-                                    className="w-20 h-20 rounded-lg object-cover cursor-pointer border hover:border-black"
-                                />
-                            ))}
+                            <img
+                                src={image}
+                                alt="thumbnail"
+                                loading="lazy"
+                                className="w-20 h-20 rounded-lg object-cover cursor-pointer border hover:border-black"
+                            />
                         </div>
 
                     </div>
-
 
 
                     {/* Right Section - Product Info */}
                     <div>
 
                         <h1 className="text-2xl md:text-3xl font-semibold mb-3">
-                            Regular Slotted Carton RSC
+                            {productData?.title}
                         </h1>
 
                         {/* Availability */}
@@ -99,7 +131,7 @@ export default function ProductDeatils() {
                                     : "text-red-700"
                                     }`}
                             >
-                                {true ? (
+                                {productData?.is_available ? (
                                     <>
                                         <CheckCircle2 className="w-5 h-5 text-green-500" />
                                         <span>In Stock</span>
@@ -123,14 +155,13 @@ export default function ProductDeatils() {
 
 
                         <p className="text-gray-600 mb-4 text-justify text-leading-6">
-                            Regular Slotted Cartons (RSC) are widely used packaging boxes known for their durability, versatility, and cost-effectiveness. Featuring equally sized flaps that meet at the center, they provide excellent protection for goods during shipping and storage. Ideal for multiple industries, RSC boxes are strong, efficient, and customizable for branding needs.
+                            {productData?.description}
                         </p>
 
 
                         {/* Price */}
                         <div className="flex items-center gap-4 mb-4 sm:mb-6">
-                            <span className="text-xl font-bold text-green-700">₹122.00/box</span>
-                            <span className="text-lg text-red-600 line-through">₹166.00</span>
+                            <span className="text-xl font-bold text-green-700">₹{price}/box</span>
                         </div>
 
 
@@ -144,10 +175,12 @@ export default function ProductDeatils() {
                                 <input
                                     type="number"
                                     min={1}
-                                    defaultValue={1}
+                                    onChange={(e) => setSelectedQuantity(parseInt(e.target.value))}
+                                    defaultValue={selectedQuantity}
                                     className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                                 />
                             </div>
+
 
                             {/* Paper Type Options */}
                             <div className="mb-2 sm:mb-4">
@@ -182,9 +215,9 @@ export default function ProductDeatils() {
                                     <SelectValue placeholder="Select size" />
                                 </SelectTrigger>
                                 <SelectContent className="rounded-lg shadow-lg">
-                                    {sizes.map((size) => (
-                                        <SelectItem key={size} value={size}>
-                                            {size}
+                                    {productData?.sizes?.map((size) => (
+                                        <SelectItem key={size.id} value={size.size_ratio}>
+                                            {size.size_ratio}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -225,16 +258,7 @@ export default function ProductDeatils() {
                     </p>
                 </div>
 
-                <motion.div
-                    layout
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                    <AnimatePresence>
-                        {productsData.slice(0, 3).map((product, idx) => (
-                            <ProductCard key={idx} product={product} />
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                <RelatedProducts />
 
             </div>
 

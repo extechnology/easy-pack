@@ -2,28 +2,29 @@ import { motion } from "framer-motion";
 import { ShoppingCart, CheckCircle2, XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import type { ProductType } from "@/types/ProductType";
 
 
 
 
-interface Product {
-    id: number;
-    title: string;
-    description: string;
-    points: string[];
-    image: string;
-    price: number;
-    oldPrice?: number;
-    inStock: boolean;
-}
+
+export default function ProductCard({ product }: { product: ProductType }) {
 
 
-
-
-export default function ProductCard({ product }: { product: Product }) {
-
-
+    // States
     const [selectedPaper, setSelectedPaper] = useState("Brown");
+    const [image, setImage] = useState<string>(product?.paper_brown_img)
+    const [Price, setPrice] = useState<string>(product?.paper_brown_price)
+
+
+
+    // Handle paper change
+    const handlePaperChange = (paper: string) => {
+        setSelectedPaper(paper);
+        setImage(paper === "Brown" ? product?.paper_brown_img : product?.paper_white_img);
+        setPrice(paper === "Brown" ? product?.paper_brown_price : product?.paper_white_price);
+    };
+
 
 
     return (
@@ -41,10 +42,9 @@ export default function ProductCard({ product }: { product: Product }) {
             {/* Image */}
             <div className="relative h-56 overflow-hidden">
 
-
                 <img
-                    src={product.image}
-                    alt={product.title}
+                    src={image}
+                    alt={product?.title}
                     loading="lazy"
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
@@ -59,7 +59,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     className="absolute top-4 left-4"
                 >
 
-                    {product.inStock ? (
+                    {product?.is_available ? (
                         <span className="flex items-center gap-1 text-xs font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full shadow-sm">
                             <CheckCircle2 className="w-4 h-4" />
                             In Stock
@@ -84,20 +84,15 @@ export default function ProductCard({ product }: { product: Product }) {
 
                 {/* Title */}
                 <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 group-hover:text-green-600 transition-colors duration-300">
-                    {product.title}
+                    {product?.title}
                 </h3>
 
 
                 {/* Price */}
                 <div className="flex items-center gap-3 mb-3">
                     <span className="text-xl font-semibold text-gray-900">
-                        ₹{product.price}
+                        ₹{Price}
                     </span>
-                    {product.oldPrice && (
-                        <span className="text-sm line-through text-gray-400">
-                            ₹{product.oldPrice}
-                        </span>
-                    )}
                 </div>
 
 
@@ -108,7 +103,7 @@ export default function ProductCard({ product }: { product: Product }) {
                         {["Brown", "White"].map((paper) => (
                             <button
                                 key={paper}
-                                onClick={() => setSelectedPaper(paper)}
+                                onClick={() => handlePaperChange(paper)}
                                 className={`px-4 py-2 rounded-md border text-sm font-medium transition-all hover:cursor-pointer ${selectedPaper === paper
                                     ? "bg-green-600 text-white border-green-600 shadow-sm"
                                     : "bg-gray-50 border-gray-300 text-gray-700 hover:border-green-600"
@@ -123,26 +118,26 @@ export default function ProductCard({ product }: { product: Product }) {
 
                 {/* Description */}
                 <p className="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                    {product.description}
+                    {product?.description}
                 </p>
 
 
                 {/* CTA */}
-                <Link to={`/productdetails/${product.id}`} className="mt-auto">
+                <Link to={`/productdetails/${product?.id}`} className="mt-auto">
                     <motion.button
                         whileHover={{
                             scale: 1.05,
                             boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
                         }}
                         whileTap={{ scale: 0.95 }}
-                        disabled={!product.inStock}
+                        disabled={!product?.is_available}
                         className={`w-full px-6 py-3 text-sm md:text-base font-medium rounded-full transition-all duration-300 flex items-center justify-center gap-2
-              ${product.inStock
+              ${product?.is_available
                                 ? "bg-gradient-to-r from-green-600 to-green-500 text-white hover:cursor-pointer"
                                 : "bg-gray-200 text-gray-500 cursor-not-allowed"
                             }`}
                     >
-                        {product.inStock ? "Customize & Order" : "Out of Stock"}
+                        {product?.is_available ? "Customize & Order" : "Out of Stock"}
                         <ShoppingCart className="h-4 w-4" />
                     </motion.button>
                 </Link>

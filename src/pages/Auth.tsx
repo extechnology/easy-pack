@@ -1,15 +1,9 @@
-// components/AuthModal.tsx
 import React from "react";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { LogIn, UserPlus } from "lucide-react"; // modern icons
+import Login from "@/components/auth/Login";
+import Register from "@/components/auth/Register";
 
 
 
@@ -78,91 +72,36 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onOpenChange }) => {
                         </TabsList>
 
 
-
                         {/* Login */}
                         <TabsContent value="login" className="mt-6 space-y-4">
 
-                            <Input
-                                placeholder="Username"
-                                className="bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-2 focus:ring-red-400 py-5"
-                            />
-
-                            <Input
-                                type="password"
-                                placeholder="Password"
-                                className="bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-2 focus:ring-red-400 py-5"
-                            />
-
-                            <Button className="w-full py-5 bg-white text-red-500 hover:bg-gray-100 font-semibold flex items-center justify-center gap-2 shadow-md transition-all duration-200">
-                                <LogIn size={18} /> Login
-                            </Button>
-
-                            <Button
-                                variant="outline"
-                                className="w-full py-5 flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-100 border border-gray-300 shadow-sm transition-all duration-200"
-                            >
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-                                    alt="Google"
-                                    loading="lazy"
-                                    className="w-5 h-5"
-                                />
-                                Login with Google
-                            </Button>
+                            <Login onClose={() => onOpenChange(false)} />
 
                         </TabsContent>
-
-
 
 
                         {/* Register */}
                         <TabsContent value="register" className="mt-6 space-y-4">
 
-                            <Input
-                                placeholder="Username"
-                                className="bg-white py-5 text-black placeholder-gray-500 border-gray-300 focus:ring-2 focus:ring-red-400"
-                            />
-
-                            <Input
-                                type="password"
-                                placeholder="Password"
-                                className="bg-white py-5 text-black placeholder-gray-500 border-gray-300 focus:ring-2 focus:ring-red-400"
-                            />
-
-                            <Input
-                                type="password"
-                                placeholder="Confirm Password"
-                                className="bg-white py-5 text-black placeholder-gray-500 border-gray-300 focus:ring-2 focus:ring-red-400"
-                            />
-
-                            <Button className="w-full py-5 bg-white text-red-500 hover:bg-gray-100 font-semibold flex items-center justify-center gap-2 shadow-md transition-all duration-200">
-                                <UserPlus size={18} /> Register
-                            </Button>
-
-                            <Button
-                                variant="outline"
-                                className="w-full py-5 flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-100 border border-gray-300 shadow-sm transition-all duration-200"
-                            >
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-                                    alt="Google"
-                                    loading="lazy"
-                                    className="w-5 h-5"
-                                />
-                                Register with Google
-                            </Button>
+                            <Register onClose={() => onOpenChange(false)} />
 
                         </TabsContent>
 
+
                     </Tabs>
+
 
                 </motion.div>
 
+
             </DialogContent>
+
 
         </Dialog>
 
+
     );
+
 
 };
 
