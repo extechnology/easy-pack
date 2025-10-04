@@ -12,8 +12,10 @@ import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
 import { Button } from "@/components/ui/button";
-import { useAuthModal } from "@/hooks/useAuthModal";
 import AuthModal from "@/pages/Auth";
+import { useAuth } from "@/context/AuthContext";
+import { useGetAllProducts } from "@/services/products/queries";
+
 
 
 
@@ -22,16 +24,22 @@ const Navbar = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const location = useLocation();
 
 
-  const authModal = useAuthModal();
+  // Auth context
+  const { isAuthenticated, logout } = useAuth();
+
+
+  // Get all products
+  const { data: products, isLoading, isError, isFetching } = useGetAllProducts(1);
 
 
 
   // Toggle mobile menu
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
 
 
 
@@ -55,56 +63,6 @@ const Navbar = () => {
 
 
 
-
-  // Services list
-  const services = [
-    {
-      title: "Regular Slotted Carton ",
-      description:
-        "Regular Slotted Cartons (RSC) are widely used packaging boxes known for their durability, versatility, and cost-effectiveness",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
-    },
-    {
-      title: "Folding Cartons",
-      description:
-        "Folding cartons are lightweight, versatile packaging solutions made from paperboard, commonly used for retail products.",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/3176/3176366.png",
-    },
-    {
-      title: "Litholaminated boxes",
-      description:
-        "Litho laminated cartons combine high-quality lithographic printing with strong corrugated board, creating durable and visually appealing packaging",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
-    },
-    {
-      title: "Die-Cut Boxes",
-      description:
-        "Customized and non-customized die-cut boxes are precision-cut packaging solutions tailored to specific shapes and sizes.",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/1046/1046861.png",
-    },
-    {
-      title: "Rigid Boxes",
-      description:
-        "Customized and non-customized rigid boxes are durable, premium packaging solutions designed for strength and elegance.",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/1046/1046787.png",
-    },
-    {
-      title: "Corrugated Mailer Boxes",
-      description:
-        "Customized and non-customized corrugated mailer boxes offer strong, lightweight, and eco-friendly packaging ideal for shipping.",
-      href: "/products",
-      icon: "https://cdn-icons-png.flaticon.com/512/2909/2909761.png",
-    },
-  ];
-
-
-
-
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
@@ -121,15 +79,17 @@ const Navbar = () => {
 
 
 
-  // Fake login/logout handler
+  // Auth click
   const handleAuthClick = () => {
-    if (isLoggedIn) {
-      // logout
-      setIsLoggedIn(false);
-      console.log("Logged out");
+
+    if (isAuthenticated) {
+
+      logout();
+
     } else {
-      // open login modal
-      authModal.onOpen();
+
+      setIsAuthModalOpen(true);
+
     }
   };
 
@@ -234,31 +194,46 @@ const Navbar = () => {
 
                       </div>
 
-
                       <div className="grid grid-cols-2 gap-2">
-                        {services.map((service) => (
-                          <NavigationMenuLink key={service.title} asChild>
-                            <Link
-                              to={service.href}
-                              className="group grid grid-cols-[60px_1fr] gap-3 rounded-md p-0 hover:bg-accent transition-colors"
-                            >
-                              <img
-                                src={service.icon}
-                                loading="lazy"
-                                alt={service.title}
-                                className="w-14 h-14 object-contain rounded-xl"
-                              />
-                              <div>
-                                <div className="text-sm font-medium leading-none group-hover:underline">
-                                  {service.title}
+
+                        {isLoading || products?.results?.length === 0 || isFetching || isError ? Array.from({ length: 4 }).map((_, idx) => (
+                          <div
+                            key={idx}
+                            className="animate-pulse flex gap-3 items-start rounded-md p-2 bg-gray-200/50"
+                          >
+                            {/* Image skeleton */}
+                            <div className="w-14 h-14 bg-gray-200 rounded-xl" />
+
+                            {/* Text skeleton */}
+                            <div className="flex-1 space-y-2 py-1">
+                              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                              <div className="h-3 bg-gray-200 rounded w-full"></div>
+                            </div>
+                          </div>
+                        ))
+                          : products?.results?.slice(0, 4).map((service) => (
+                            <NavigationMenuLink key={service?.title} asChild>
+                              <Link
+                                to={`/products`}
+                                className="group grid grid-cols-[60px_1fr] gap-3 rounded-md p-0 hover:bg-accent transition-colors"
+                              >
+                                <img
+                                  src={service?.paper_brown_img}
+                                  loading="lazy"
+                                  alt={service?.title}
+                                  className="w-14 h-14 object-contain rounded-xl"
+                                />
+                                <div>
+                                  <div className="text-sm font-medium leading-none group-hover:underline line-clamp-4">
+                                    {service?.title}
+                                  </div>
+                                  <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1">
+                                    {service?.description}
+                                  </p>
                                 </div>
-                                <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1">
-                                  {service.description}
-                                </p>
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        ))}
+                              </Link>
+                            </NavigationMenuLink>
+                          ))}
                       </div>
 
                     </div>
@@ -300,7 +275,7 @@ const Navbar = () => {
               onClick={handleAuthClick}
               className={`hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full ${isHome && !isScrolled ? "bg-white text-black hover:bg-gray-100 hover:cursor-pointer hover:scale-105" : "bg-red-500 text-white hover:bg-red-600 hover:shadow-lg hover:scale-[1.03] active:scale-[0.97] hover:cursor-pointer"} `}
             >
-              {isLoggedIn ? (
+              {isAuthenticated ? (
                 <>
                   <LogOut size={16} /> Logout
                 </>
@@ -334,12 +309,17 @@ const Navbar = () => {
           isMobileMenuOpen={isMobileMenuOpen}
           setIsMobileMenuOpen={setIsMobileMenuOpen}
           navItems={navItems}
-          services={services}
+          services={products?.results || []}
+          isError={isError}
+          isLoading={isLoading}
+          isFetching={isFetching}
         />
+
       </div>
 
       {/* Place modal once here */}
-      <AuthModal open={authModal.open} onOpenChange={authModal.setOpen} />
+      <AuthModal open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen} />
+
     </nav>
   );
 };

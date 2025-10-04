@@ -6,7 +6,6 @@ import { BlurFade } from "@/components/magicui/blur-fade"
 
 
 
-
 export default function Index() {
 
 

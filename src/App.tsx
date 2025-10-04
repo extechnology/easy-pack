@@ -1,7 +1,8 @@
 import { Suspense, lazy } from "react"
 import { Route, Routes } from "react-router-dom"
-import SuspenseLoader from "./components/common/SuspenseLoader"
+import SuspenseLoader from "./components/loaders/SuspenseLoader"
 import ScrollToTop from "./components/common/ScrollToTop"
+import { Toaster } from "sonner"
 
 
 
@@ -31,6 +32,9 @@ function App() {
     <>
 
       <Suspense fallback={<SuspenseLoader />}>
+
+
+        <Toaster />
 
         <ScrollToTop />
 
