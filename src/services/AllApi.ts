@@ -1,7 +1,7 @@
 import { CommonApi } from "./CommonApi";
 
 
-const Base_Url = "https://98d978d879a4.ngrok-free.app/api/easypack/";
+const Base_Url = "https://7471038e2e2e.ngrok-free.app/api/easypack/";
 
 
 // User API Login

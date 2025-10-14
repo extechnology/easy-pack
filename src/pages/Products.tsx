@@ -125,13 +125,13 @@ export default function Products() {
                 {/* Pagination Bar */}
                 <div className="flex justify-center px-4 py-3 gap-2 items-center">
 
-                    <Button variant="outline" className="py-5 px-5 bg-gradient-to-r from-green-600 to-green-500 text-white hover:cursor-pointer" size="sm" disabled={page === 1} onClick={() => setPage(page - 1)}>
+                    <Button variant="outline" className="py-5 px-5 bg-gradient-to-r from-green-600 to-green-500 text-white hover:cursor-pointer" size="sm" disabled={page === 1 || isLoading || isFetching || isError} onClick={() => setPage(page - 1)}>
                         Previous
                     </Button>
 
                     <span className="text-sm font-medium dark:text-white">Page {page} of {products?.total_pages ?? 0}</span>
 
-                    <Button variant="outline" className="py-5 px-5 bg-gradient-to-r from-green-600 to-green-500 text-white hover:cursor-pointer" size="sm" disabled={page === products?.total_pages} onClick={() => setPage(page + 1)}>
+                    <Button variant="outline" className="py-5 px-5 bg-gradient-to-r from-green-600 to-green-500 text-white hover:cursor-pointer" size="sm" disabled={page === products?.total_pages || isLoading || isFetching || isError} onClick={() => setPage(page + 1)}>
                         Next
                     </Button>
 

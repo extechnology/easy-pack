@@ -55,31 +55,31 @@ export default function Hero() {
                 {/* Left: Boxes */}
                 <div className="relative flex-1 flex items-center justify-center">
                     <motion.img
-                        src="https://packwire.com/images/home/boxs/header-box-new/blue-folding.png"
+                        src="/litholaminated.png"
                         alt="box1"
                         loading="lazy"
-                        className="w-24 sm:w-28 absolute z-40 top-32 left-24"
+                        className="w-24 sm:w-28 absolute z-40 top-32 left-28"
                         style={{ y: box1Y, x: box1X }}
                     />
                     <motion.img
-                        src="https://packwire.com/images/home/boxs/header-box-new/blue-rigid.png"
+                        src="/die-cut.png"
                         alt="box2"
                         loading="lazy"
                         className="w-32 sm:w-72 absolute z-30 top-10 left-28"
                         style={{ y: box2Y, x: box2X }}
                     />
                     <motion.img
-                        src="https://packwire.com/images/home/boxs/header-box-new/blue-mailer.png"
+                        src="/rigid.png"
                         alt="box3"
                         loading="lazy"
-                        className="w-40 sm:w-72 absolute z-20 -top-10 left-60"
+                        className="w-40 sm:w-72 absolute z-20 -top-20 left-60"
                         style={{ y: box3Y, x: box3X }}
                     />
                     <motion.img
-                        src="https://packwire.com/images/home/boxs/header-box-new/blue-shipping.png"
+                        src="/corrugated.png"
                         alt="box4"
                         loading="lazy"
-                        className="w-44 sm:w-72 absolute z-10 -top-40 left-96"
+                        className="w-44 sm:w-72 absolute z-10 -top-40 left-90"
                         style={{ y: box4Y, x: box4X }}
                     />
                 </div>

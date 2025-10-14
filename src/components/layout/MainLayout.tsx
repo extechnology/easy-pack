@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "../common/Navbar"
 import Footer from "../common/Footer"
+import WhatsAppChat from "../common/WhatsApp"
 
 
 
@@ -32,6 +33,12 @@ export default function MainLayout() {
             <footer>
                 <Footer />
             </footer>
+
+
+            <section aria-label="WhatsApp Chat">
+                <WhatsAppChat />
+            </section>
+
 
         </div>
 

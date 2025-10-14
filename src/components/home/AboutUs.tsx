@@ -11,7 +11,7 @@ export default function AboutUs() {
     return (
 
 
-        <section className="w-full px-2 sm:px-10 lg:px-20 py-8 sm:py-16 border-t-2 border-dashed border-gray-200">
+        <section className="w-full px-2 sm:px-10 lg:px-20 py-8 sm:py-16">
 
 
             {/* Grid Layout */}
@@ -36,7 +36,7 @@ export default function AboutUs() {
 
                             {/* Image */}
                             <img
-                                src="https://w0.peakpx.com/wallpaper/447/499/HD-wallpaper-city-ferris-wheel-aerial-view-buildings-lights-water.jpg"
+                                src="/whyus-1.jpg"
                                 alt="Packaging industry machinery"
                                 className="w-full object-cover min-h-[260px] sm:min-h-[320px] lg:min-h-[640px] transform transition-transform duration-500 group-hover:scale-110"
                                 loading="lazy"
@@ -113,7 +113,7 @@ export default function AboutUs() {
                         {/* Small image */}
                         <div className="relative rounded-2xl overflow-hidden shadow-lg group self-stretch">
                             <img
-                                src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1200&auto=format&fit=crop"
+                                src="/whyus-2.jpg"
                                 alt="Easypack factory packaging process"
                                 className="w-full object-cover h-[220px] sm:h-[240px] lg:h-[360px] transform transition-transform duration-500 group-hover:scale-110"
                                 loading="lazy"
