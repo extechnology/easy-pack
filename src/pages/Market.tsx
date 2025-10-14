@@ -6,52 +6,52 @@ const industries = [
     {
         title: "Food & Beverage Industry",
         desc: "Easy Pack delivers premium cardboard boxes and packaging solutions exclusively designed for the food and beverage industry. Ensuring durability, hygiene, freshness, and eco-friendliness, we support restaurants, bakeries, cafes, and delivery services with innovative and customized solutions.",
-        img: "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1200&auto=format&fit=crop",
+        img: "https://wp-headless.elca-cloud.com/glion/wp-content/uploads/sites/2/2025/06/What-is-food-and-beverage-service-2.jpg",
     },
     {
         title: "E-commerce & Online Retail",
         desc: "High-quality cardboard packaging for safe delivery, product protection, and professional presentation. We support clothing, electronics, and essentials with customized solutions that enhance customer experience and logistics reliability.",
-        img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop",
+        img: "https://media.istockphoto.com/id/1051616786/photo/digital-marketing-businessman-working-with-laptop-computer-tablet-and-smart-phone-modern.jpg?s=612x612&w=0&k=20&c=J2A6-q3RtqbISouQVBgpYtI1Ft9KeVsANUFHgG4Olbc=",
     },
     {
         title: "Electronics & Appliances",
         desc: "Sturdy, eco-friendly boxes for mobiles, laptops, and appliances. Designed to ensure product protection, safe transit, and professional presentation while promoting sustainability.",
-        img: "https://images.unsplash.com/photo-1581091870633-7dc074f8b9f6?q=80&w=1200&auto=format&fit=crop",
+        img: "https://static-assets.business.amazon.com/assets/in/24th-jan/705_Website_Blog_Appliances_1450x664.jpg.transform/1450x664/image.jpg",
     },
     {
         title: "Pharmaceuticals & Healthcare",
         desc: "Specialized, eco-friendly packaging for medicines, devices, and healthcare essentials. Ensures safety, hygiene, durability, and compliance with industry standards.",
-        img: "https://images.unsplash.com/photo-1588776814546-ec6f5c2e20d0?q=80&w=1200&auto=format&fit=crop",
+        img: "https://assets.thehansindia.com/h-upload/2019/12/28/249445-pharma.webp",
     },
     {
         title: "Cosmetics & Personal Care",
         desc: "Premium, customizable boxes that balance durability, style, and sustainability. Designed to enhance beauty product presentation and brand identity.",
-        img: "https://images.unsplash.com/photo-1600185365483-26d7a4f3ae9f?q=80&w=1200&auto=format&fit=crop",
+        img: "https://5.imimg.com/data5/SELLER/Default/2022/8/XN/NF/SB/157564005/beauty-personal-care.jpg",
     },
     {
         title: "Stationery & Printing",
         desc: "Durable, eco-friendly packaging for books, office supplies, and printed materials. Ensures professional appearance, protection, and organized presentation.",
-        img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1200&auto=format&fit=crop",
+        img: "https://5.imimg.com/data5/SELLER/Default/2023/8/331131366/TO/YY/KQ/2783692/office-stationery-printing.jpg",
     },
     {
         title: "Furniture & Home Décor",
         desc: "Sturdy packaging for heavy and delicate décor items. Ensures safe handling, aesthetic appeal, and reduced damage risk during storage and transit.",
-        img: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1200&auto=format&fit=crop",
+        img: "https://media.designcafe.com/wp-content/uploads/2020/12/21184029/living-room-furniture-decor-ideas.jpg",
     },
     {
         title: "Automotive & Spare Parts",
         desc: "Reliable cardboard solutions for heavy loads and sensitive components. Customizable, eco-friendly packaging designed for efficiency and safety.",
-        img: "https://images.unsplash.com/photo-1523983303491-9cc7b6b4d1e7?q=80&w=1200&auto=format&fit=crop",
+        img: "https://www.shutterstock.com/image-illustration/car-parts-auto-spare-isolated-600nw-2283939101.jpg",
     },
     {
         title: "Agriculture & Farming",
         desc: "Eco-friendly boxes for fresh produce, seeds, and grains. Ensures freshness, safety, and cost-effective delivery for agricultural businesses.",
-        img: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1200&auto=format&fit=crop",
+        img: "https://cdn.prod.website-files.com/66604a97df59732aab43fcc8/674882e6935eaaad6bdf3fb7_post-23.webp",
     },
     {
         title: "Textiles & Garments",
         desc: "Premium packaging for clothing and fabrics. Combines durability, branding, and eco-friendliness to enhance product presentation and storage.",
-        img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop",
+        img: "https://indiantextilejournal.com/wp-content/uploads/Textile1.jpg",
     },
 ];
 
@@ -74,7 +74,7 @@ export default function OurMarket() {
             <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">
                 {/* Background Image */}
                 <img
-                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop"
+                    src="/Our-Market-banner.jpg"
                     alt="Our Market"
                     className="absolute inset-0 w-full h-full object-cover brightness-75"
                 />

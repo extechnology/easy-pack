@@ -20,7 +20,7 @@ export default function AboutUs() {
 
 
                 <img
-                    src="https://png.pngtree.com/thumb_back/fh260/background/20230704/pngtree-3d-render-of-corrugated-cardboard-boxes-image_3803840.jpg"
+                    src="/About-banner.jpg"
                     alt="Packaging factory"
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover"
@@ -96,7 +96,7 @@ export default function AboutUs() {
                 >
 
                     <img
-                        src="https://t4.ftcdn.net/jpg/02/81/89/73/360_F_281897358_3rj9ZBSZHo5s0L1ug7uuIHadSxh9Cc75.jpg"
+                        src="/Who-we-are.jpg"
                         alt="Our Factory"
                         loading="lazy"
                         className="rounded-2xl shadow-xl object-cover w-full h-[250px] sm:h-[320px] md:h-[380px] transform group-hover:scale-105 transition duration-700 ease-in-out"
@@ -130,14 +130,13 @@ export default function AboutUs() {
                             <span className="absolute left-0 -bottom-1 w-12 sm:w-16 h-1 bg-indigo-500 rounded-full"></span>
                         </h3>
 
-                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                            To serve as the primary point of contact for our clients by
+                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-justify">
+                            Our goal is to  To serve as the primary point of contact for our clients by
                             offering{" "}
                             <span className="font-semibold text-white">
-                                high-quality paper corrugated boxes
+                                high-quality paper packages for the product boxes
                             </span>{" "}
-                            at competitive prices. We continually strive to improve our
-                            services through{" "}
+                            at competitive prices.( custamizeda ) We are committed to continually striving to improve our services through our {" "}
                             <span className="font-semibold text-indigo-400">
                                 expertise and cutting-edge machinery
                             </span>{" "}
@@ -161,7 +160,7 @@ export default function AboutUs() {
                             <span className="absolute left-0 -bottom-1 w-12 sm:w-16 h-1 bg-pink-500 rounded-full"></span>
                         </h3>
 
-                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                        <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-justify">
                             To offer{" "}
                             <span className="font-semibold text-white">
                                 comprehensive packaging solutions
@@ -190,7 +189,7 @@ export default function AboutUs() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 grid md:grid-cols-2 gap-10 md:gap-12 items-center">
 
                 <motion.img
-                    src="https://t4.ftcdn.net/jpg/02/81/89/73/360_F_281897358_3rj9ZBSZHo5s0L1ug7uuIHadSxh9Cc75.jpg"
+                    src="/Our-Infrastructure.jpg"
                     alt="Infrastructure"
                     loading="lazy"
                     className="rounded-2xl shadow-lg object-cover w-full h-[240px] sm:h-[300px] md:h-[350px]"
@@ -241,7 +240,7 @@ export default function AboutUs() {
                                 img: "https://cdn-icons-png.flaticon.com/512/5270/5270211.png",
                             },
                             {
-                                title: "Corrugated Cartons | Master Boxes",
+                                title: "Corrugated Cartons | Master Online Cartons",
                                 img: "https://cdn-icons-png.flaticon.com/512/3081/3081559.png",
                             },
                             {
@@ -302,7 +301,7 @@ export default function AboutUs() {
                         the Perfect Box
                     </h2>
                     <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
-                        At Easypaks, quality is at the core of everything we do. From raw
+                        At Easypack, quality is at the core of everything we do. From raw
                         material selection to final delivery, every stage undergoes rigorous
                         testing and inspection to meet international standards.
                     </p>
@@ -315,7 +314,7 @@ export default function AboutUs() {
                 </motion.div>
 
                 <motion.img
-                    src="https://t4.ftcdn.net/jpg/02/81/89/73/360_F_281897358_3rj9ZBSZHo5s0L1ug7uuIHadSxh9Cc75.jpg"
+                    src="/Your-Product-Deserves-the-perfect.jpg"
                     alt="Quality Assurance"
                     loading="lazy"
                     className="rounded-2xl shadow-2xl object-cover w-full h-[240px] sm:h-[320px] md:h-[420px]"

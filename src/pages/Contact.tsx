@@ -15,7 +15,7 @@ export default function Contact() {
             {/* Hero Section */}
             <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] flex items-center justify-center bg-black/50">
                 <img
-                    src="https://images.unsplash.com/photo-1525182008055-f88b95ff7980"
+                    src="/Contact-banner.jpg"
                     alt="Contact Background"
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover"

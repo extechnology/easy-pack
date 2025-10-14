@@ -31,10 +31,10 @@ export default function Footer() {
             <a href="#" className="hover:text-white">
               <i className="fa-brands fa-x-twitter fa-xl"></i>
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="https://www.instagram.com/easypacks.in/#" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-instagram fa-xl"></i>
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="https://www.facebook.com/easypacks.in/" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-facebook fa-xl"></i>
             </a>
             <a href="#" className="hover:text-white">
@@ -83,7 +83,7 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-400 text-sm">
               <li className="flex items-start gap-3">
                 <p className="leading-relaxed">
-                  EASYPACK PACKING SOLUTIONS,
+                  EASYPACK PACKING,
                   <br />
                   Bldg No: 8/354A, UKC, Kakkanchery,
                   <br />
