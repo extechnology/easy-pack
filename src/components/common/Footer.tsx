@@ -28,23 +28,36 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div className="flex space-x-4 mt-6 text-gray-400">
-            <a href="#" className="hover:text-white">
-              <i className="fa-brands fa-x-twitter fa-xl"></i>
-            </a>
+
             <a href="https://www.instagram.com/easypacks.in/#" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-instagram fa-xl"></i>
             </a>
+
             <a href="https://www.facebook.com/easypacks.in/" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-facebook fa-xl"></i>
             </a>
-            <a href="#" className="hover:text-white">
+
+            <a href="https://x.com/easypack11" target="_blank" className="hover:text-white">
+              <i className="fa-brands fa-x-twitter fa-xl"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/company/easypackindustry" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-linkedin-in fa-xl"></i>
             </a>
-            <a href="#" className="hover:text-white">
+
+            <a href="https://in.pinterest.com/easypackmarketing/" target="_blank" className="hover:text-white">
               <i className="fa-brands fa-pinterest fa-xl"></i>
             </a>
+
+
+            <a href="https://www.youtube.com/@easypackmarketing" target="_blank" className="hover:text-white">
+              <i className="fa-brands fa-youtube fa-xl"></i>
+            </a>
+
           </div>
+
         </div>
+
 
         {/* Links Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:w-2/3">
