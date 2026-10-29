@@ -133,7 +133,7 @@ export default function OurMarket() {
                                     {industry.desc}
                                 </p>
                                 <a
-                                    href="https://wa.me/+919656247222?text=Hi%20Easypack%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20packaging%20solutions."
+                                    href="https://wa.me/917907798266?text=Hi%20Easypack%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20packaging%20solutions."
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="mt-4 self-start px-4 py-2 bg-black text-white text-sm rounded-full shadow-md hover:bg-gray-800 transition"
