@@ -106,6 +106,7 @@ export default function Footer() {
 
               <li className="flex items-start gap-3">
                 <div className="flex flex-col">
+                  <a href="tel:+917907798266" className="hover:text-white">+91 79077 98266 (WhatsApp)</a>
                   <a href="tel:+919656247222" className="hover:text-white">+91 9656 24 72 22</a>
                   <a href="tel:+919995664686" className="hover:text-white">+91 9995 66 46 86</a>
                   <a href="tel:+919995980464" className="hover:text-white">+91 9995 98 04 64</a>

@@ -40,7 +40,7 @@ export default function Cta() {
                     transition={{ duration: 0.6 }}
                 >
                     <a
-                        href="https://wa.me/+919656247222?text=Hi%20Easypack%2C%20I%20would%20like%20to%20get%20a%20quote%20for%20packaging%20solutions."
+                        href="https://wa.me/917907798266?text=Hi%20Easypack%2C%20I%20would%20like%20to%20get%20a%20quote%20for%20packaging%20solutions."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-white text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition"

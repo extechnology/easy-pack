@@ -1,7 +1,8 @@
 import { CommonApi } from "./CommonApi";
+import type { ContactFormData } from "@/types/ContactType";
 
 
-const Base_Url = "https://7471038e2e2e.ngrok-free.app/api/easypack/";
+const Base_Url = import.meta.env.VITE_API_BASE_URL || "https://pv0smzkc-8000.inc1.devtunnels.ms/api/easypack/";
 
 
 // User API Login
@@ -62,5 +63,21 @@ export const GetSingleProduct = async (id: string, headers: object) => {
     const params = new URLSearchParams({ id: id.toString() });
 
     return await CommonApi("GET", `${Base_Url}boxes-single/?${params}`, "", headers);
+
+}
+
+
+// Submit Contact Enquiry
+export const SubmitContactEnquiry = async (data: ContactFormData) => {
+
+    return await CommonApi("POST", `${Base_Url}contact/`, data, { 'Content-Type': 'application/json' });
+
+}
+
+
+// Get Contact Enquiries
+export const GetContactEnquiries = async (headers: object = {}) => {
+
+    return await CommonApi("GET", `${Base_Url}contact/`, "", headers);
 
 }
